@@ -10,4 +10,14 @@ class Company extends Model
     use HasFactory;
 
     protected $fillable = ['company_name', 'company_location', 'contact_number', 'creator_user_id'];
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
+
+    public function departments()
+    {
+        return $this->hasMany(Department::class);
+    }
 }

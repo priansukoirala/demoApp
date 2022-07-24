@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::get('companies/getAllCompanies', [CompanyController::class, 'getAllCompanies']); // ------ publicly available route ----------
+Route::post('employees/getAllEmployeesOfCompany', [EmployeeController::class, 'getAllEmployeesOfCompany']); // ------ publicly available route ----------
 
 Route::middleware(['auth:api'])->group(function () {
     Route::group(['prefix' => 'companies', 'as' => 'companies.'], function () {
@@ -34,6 +35,9 @@ Route::middleware(['auth:api'])->group(function () {
     });
 
     Route::group(['prefix' => 'employees', 'as' => 'employees.'], function () {
+        // Route::post('getAllEmployeesOfCompany', [EmployeeController::class, 'getAllEmployeesOfCompany']);   ------- authenticated route ----------
         Route::post('', [EmployeeController::class, 'insertEmployee'])->name('store');
+        Route::post('getAllEmployeesOfDepartment', [EmployeeController::class, 'getAllEmployeesOfDepartment']);
+        Route::get('getEmployeeDetailsWithCompanyDepartment/{id}', [EmployeeController::class, 'getEmployeeDetailsWithCompanyDepartment']);
     });
 });

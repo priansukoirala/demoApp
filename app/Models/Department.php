@@ -14,4 +14,15 @@ class Department extends Model
         'company_id',
         'creator_user_id'
     ];
+
+
+    public function company()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
 }

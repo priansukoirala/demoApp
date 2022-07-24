@@ -15,7 +15,16 @@ class Employee extends Model
         'employee_email',
         'employee_contact_number',
         'employee_designation',
-        'company_id',
-        'department_id'
+        'company_id'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class);
+    }
 }

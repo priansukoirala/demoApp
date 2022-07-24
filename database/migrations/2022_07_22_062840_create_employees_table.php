@@ -21,12 +21,17 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_contact_number');
             $table->string('employee_designation');
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('department_id');
 
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('restrict');
+        });
+        Schema::create('department_employee', function (Blueprint $table) {
+            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('employee_id');
+
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('restrict');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('restrict');
         });
     }
 
